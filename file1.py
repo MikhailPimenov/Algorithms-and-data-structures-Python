@@ -1,80 +1,33 @@
-# Lecture 6
-# insertion_sort
-# selection_sort
-# bubble_sort
+# lecture 7
+# fractal_rectangle
 
-def insertion_sort(list):
-    """
-    Sorts list inserting next element in sorted part of list
-    :param list: list to be sorted
-    :return:
-    """
-    N = len(list)
+import graphics as gr
 
-    for top in range(1, N):
-        k = top
-        while k > 0 and list[k - 1] > list[k]:
-            list[k], list[k - 1] = list[k - 1], list[k]
-            k -= 1
+h = 600
+w = 600
+
+window = gr.GraphWin("RG", w, h)
+
+alpha = 0.2
 
 
-def selection_sort(list):
-    """
-    Sorts list selecting next element in not sorted part and adding it to sorted part
-    :param list: list to be sorted
-    :return:
-    """
-    N = len(list)
+def fractal_rectangle(a, b, c, d, deep=10):
+    if deep < 1:
+        return
 
-    for pos in range(N - 1):
-        element = list[pos]
-        index = pos
-        for k in range(pos + 1, N):
-            if list[k] < element:
-                element = list[k]
-                index = k
-        list[index], list[pos] = list[pos], list[index]
+    for m, n in (a, b), (b, c), (c, d), (d, a):
+        gr.Line(gr.Point(*m), gr.Point(*n)).draw(window)
 
 
-def bubble_sort(list):
-    """
-    Sorts list moving 'lightest' element to the end of list.
-    :param list: list to be sorted
-    :return:
-    """
-    N = len(list)
+    a1 = (a[0] * (1 - alpha) + b[0] * alpha, a[1] * (1 - alpha) + b[1] * alpha)
+    b1 = (b[0] * (1 - alpha) + c[0] * alpha, b[1] * (1 - alpha) + c[1] * alpha)
+    c1 = (c[0] * (1 - alpha) + d[0] * alpha, c[1] * (1 - alpha) + d[1] * alpha)
+    d1 = (d[0] * (1 - alpha) + a[0] * alpha, d[1] * (1 - alpha) + a[1] * alpha)
 
-    for k in range(N - 1):
-        for j in range(N - 1 - k):
-            if list[j + 1] < list[j]:
-                list[j + 1], list[j] = list[j], list[j + 1]
+    fractal_rectangle(a1, b1, c1, d1, deep - 1)
 
 
-def test_sort(sorting_algorithm):
-    print("Testing: ", sorting_algorithm.__doc__)
+set = 10
+fractal_rectangle((set, set), (w - set, set), (w - set, h - set), (set, h - set), 20)
 
-    list = [1, 3, 2, 5, 4]
-    list_sorted = [1, 2, 3, 4, 5]
-
-    print("Test #1: ", end="")
-    sorting_algorithm(list)
-    print("ok" if list == list_sorted else "FAILED")
-
-    list = [2, 2, 1, 0, 5]
-    list_sorted = [0, 1, 2, 2, 5]
-
-    print("Test #2: ", end="")
-    sorting_algorithm(list)
-    print("ok" if list == list_sorted else "FAILED")
-
-    list = [1, 3, 2, 5, 4, 1, 1, 2, 7, 5, 6, 6, 3]
-    list_sorted = [1, 1, 1, 2, 2, 3, 3, 4, 5, 5, 6, 6, 7]
-
-    print("Test #3: ", end="")
-    sorting_algorithm(list)
-    print("ok" if list == list_sorted else "FAILED")
-
-
-test_sort(insertion_sort)
-test_sort(selection_sort)
-test_sort(bubble_sort)
+window.wait_window()
