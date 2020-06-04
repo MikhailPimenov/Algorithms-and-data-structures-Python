@@ -1,118 +1,127 @@
-# lecture 12 part 2 of 2
-# part 1
-# levenshtein
-# part 2
-# pi_function
-# find_substring_kmp
+# lecture 13
+# stack
+# brace_sequence
+# reverse_polish_notation
+
+import A_stack
 
 
-def pi_function(string: str):
+def brace_sequence(string: str):
     """
-    Returns array of pi-function values for each symbol of string
-    :param string:
-    :return:
+    Checks if brace sequence is correct
+    :param string: sequence to check
+    :return: True if sequence is correct, otherwise False
+    >>> brace_sequence("()[]")
+    True
+    >>> brace_sequence("g[g(f()ff[])[f]ds()]")
+    True
+    >>> brace_sequence("ggf)f5")
+    False
+    >>> brace_sequence("fggf)f )g([])gf((")
+    False
+    >>> brace_sequence("](h)[ ][")
+    False
+    >>> brace_sequence("(  ]")
+    False
+    >>> brace_sequence("[(]tr)")
+    False
+    >>> brace_sequence("c ]v(v)vvv(v)f[")
+    False
+    >>> brace_sequence("5[4]3[f")
+    False
+
     """
-    frequency = [0] * len(string)
-    frequency[0] = 0
 
-    for index in range(1, len(string)):
-        p_index = frequency[index - 1]
+    b1o = "("
+    b1c = ")"
+    b2o = "["
+    b2c = "]"
 
-        while True:
-            if string[index] == string[p_index]:
-                if p_index > 0:
-                    frequency[index] = 1 + frequency[index - 1]
-                else:  # p_index == 0:
-                    frequency[index] = 1
-                break
+    stack = A_stack
+    stack.clear()
+
+    for index in range(len(string)):
+        if string[index] == b1o or string[index] == b1c or string[index] == b2o or string[index] == b2c:
+            if string[index] == b1c or string[index] == b2c:
+                if stack.is_empty():  # there were NO opening braces before
+                    return False
+                else:  # there were opening braces before
+                    if string[index] == b1c:
+                        if stack.pop() != b1o:  # if opening brace does not match current closing brace:
+                            return False
+                    else:
+                        if stack.pop() != b2o:
+                            return False
             else:
-                if p_index > 0:
-                    p_index = frequency[p_index]
-                else:  # p_index == 0:
-                    frequency[index] = 0
-                    break
+                stack.push(string[index])
 
-    return frequency
+    return stack.is_empty()
 
 
-def find_substring_kmp(string: str, substring: str):
+def reverse_polish_notation(array: str):
     """
-    Returns index of first appearance substring in string
-    :param string: str to search in
-    :param substring: str to search for
-    :return: index in string
+    Calculates expression given as reverse polish notation
+    :param array: str as reverse polish notation to calculate
+    :return: number as a calculated result
+    >>> reverse_polish_notation("2,7, +")
+    9
+    >>> reverse_polish_notation("1,4,-")
+    -3
+    >>> reverse_polish_notation("5,8,*")
+    40
+    >>> reverse_polish_notation("100, 25, /")
+    4.0
+
     """
-    sum_string = substring + "#" + string;
-    pi_array = pi_function(sum_string)
 
-    result = -1
-    for k in range(len(pi_array)):
-        if pi_array[k] == len(substring):
-            result = k - len(substring) - len(substring)
-            break
+    stack = A_stack
+    stack.clear()
 
-    return result
+    index = 0
+    while index < len(array):
+        if array[index].isnumeric():
+            number = int(array[index])
+            k = 1
+            while array[index + k].isnumeric():
+                number *= 10
+                number += int(array[index + k])
+                k += 1
+            stack.push(int(number))
+            index += k
+        elif array[index] == '+' or array[index] == '-' or array[index] == '*' or array[index] == '/':
+            if not stack.is_empty():
+                y = stack.pop()
+            else:
+                return -1
+            if not stack.is_empty():
+                x = stack.pop()
+            else:
+                return -1
 
+            if array[index] == '+':
+                stack.push(x + y)
+            elif array[index] == '-':
+                stack.push(x - y)
+            elif array[index] == '*':
+                stack.push(x * y)
+            else:
+                if not y == 0:
+                    stack.push(x / y)
+        index += 1
 
-def test_pi_function(algorithm):
-    print("testing pi_function:")
-
-    string = "abababa"
-    result = [0, 0, 1, 2, 3, 4, 5]
-    print("test #1:", "ok" if algorithm(string) == result else "FAILED")
-
-    string = "akeakea"
-    result = [0, 0, 0, 1, 2, 3, 4]
-    print("test #2:", "ok" if algorithm(string) == result else "FAILED")
-
-    string = "alalcda"
-    result = [0, 0, 1, 2, 0, 0, 1]
-    print("test #3:", "ok" if algorithm(string) == result else "FAILED")
-
-    string = "acdabcdabacd"
-    result = [0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2, 3]
-    print("test #4:", "ok" if algorithm(string) == result else "FAILED")
-
-
-def test_find_substring_kmp(algorithm):
-    print("testing find_substring:")
-
-    string = "father"
-    sub_string = "garden"
-    print("test #1:", "ok" if algorithm(string, sub_string) == -1 else "FAILED")
-
-    string = "pigisbig"
-    sub_string = "big"
-    print("test #2:", "ok" if algorithm(string, sub_string) == 5 else "FAILED")
-
-    string = "dog"
-    sub_string = "horse"
-    print("test #3:", "ok" if algorithm(string, sub_string) == -1 else "FAILED")
-
-    string = ""
-    sub_string = ""
-    print("test #4:", "ok" if algorithm(string, sub_string) == 0 else "FAILED")
-
-    string = "suddenly"
-    sub_string = "suddenly"
-    print("test #5:", "ok" if algorithm(string, sub_string) == 0 else "FAILED")
-
-    string = "suddenly suddenly"
-    sub_string = "sud"
-    print("test #6:", "ok" if algorithm(string, sub_string) == 0 else "FAILED")
-
-    string = "suddenly and suddenly they got crazy and crazy"
-    sub_string = "raz"
-    print("test #7:", "ok" if algorithm(string, sub_string) == 32 else "FAILED")
-
-    string = "that terrible weather is annoying me"
-    sub_string = "noy"
-    print("test #8:", "ok" if algorithm(string, sub_string) == 27 else "FAILED")
-
-    string = "big"
-    sub_string = "pig is big"
-    print("test #9:", "ok" if algorithm(string, sub_string) == -1 else "FAILED")
+    return stack.pop()
 
 
-test_pi_function(pi_function)
-test_find_substring_kmp(find_substring_kmp)
+reverse_polish_notation("2,7,+")
+
+reverse_polish_notation("1,4,-")
+
+reverse_polish_notation("5,8,*")
+
+reverse_polish_notation("100, 25, /")
+
+
+if __name__ == "__main__":
+    import doctest
+
+    doctest.testmod(verbose=False)
