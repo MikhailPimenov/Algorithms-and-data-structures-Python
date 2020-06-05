@@ -1,127 +1,75 @@
-# lecture 13
-# stack
-# brace_sequence
-# reverse_polish_notation
+# lecture 17
+# fibbonachi_recursive_cash
+# descrete_bag
 
-import A_stack
+cash = [0] * 10000
 
 
-def brace_sequence(string: str):
+def fibbonachi_recursive_cash(n: int):
     """
-    Checks if brace sequence is correct
-    :param string: sequence to check
-    :return: True if sequence is correct, otherwise False
-    >>> brace_sequence("()[]")
-    True
-    >>> brace_sequence("g[g(f()ff[])[f]ds()]")
-    True
-    >>> brace_sequence("ggf)f5")
-    False
-    >>> brace_sequence("fggf)f )g([])gf((")
-    False
-    >>> brace_sequence("](h)[ ][")
-    False
-    >>> brace_sequence("(  ]")
-    False
-    >>> brace_sequence("[(]tr)")
-    False
-    >>> brace_sequence("c ]v(v)vvv(v)f[")
-    False
-    >>> brace_sequence("5[4]3[f")
-    False
-
+    Returns fibbonachi number n using recursion with cash
+    :param n: number of fibbonachi to return
+    :return: number
     """
 
-    b1o = "("
-    b1c = ")"
-    b2o = "["
-    b2c = "]"
+    if n > 10000:
+        return -1
 
-    stack = A_stack
-    stack.clear()
+    if 0 <= n <= 1:
+        if cash[n] == 0:
+            cash[n] = n
+        return cash[n]
 
-    for index in range(len(string)):
-        if string[index] == b1o or string[index] == b1c or string[index] == b2o or string[index] == b2c:
-            if string[index] == b1c or string[index] == b2c:
-                if stack.is_empty():  # there were NO opening braces before
-                    return False
-                else:  # there were opening braces before
-                    if string[index] == b1c:
-                        if stack.pop() != b1o:  # if opening brace does not match current closing brace:
-                            return False
-                    else:
-                        if stack.pop() != b2o:
-                            return False
-            else:
-                stack.push(string[index])
+    if cash[n] == 0:
+        cash[n] = fibbonachi_recursive_cash(n - 1) + fibbonachi_recursive_cash(n - 2)
 
-    return stack.is_empty()
+    return cash[n - 1] + cash[n - 2]
 
 
-def reverse_polish_notation(array: str):
+def discrete_bag(mass: list, price: list, mass_limit: int):
     """
-    Calculates expression given as reverse polish notation
-    :param array: str as reverse polish notation to calculate
-    :return: number as a calculated result
-    >>> reverse_polish_notation("2,7, +")
-    9
-    >>> reverse_polish_notation("1,4,-")
-    -3
-    >>> reverse_polish_notation("5,8,*")
-    40
-    >>> reverse_polish_notation("100, 25, /")
-    4.0
-
+    Returns maximum cost of items with limited sum mass
+    :param mass: list of masses
+    :param price: list of prices
+    :param mass_limit: int, limit of sum mass
+    :return: int
     """
 
-    stack = A_stack
-    stack.clear()
+    cost = [[0] * (len(mass) + 1) for m in range(mass_limit + 1)]
 
-    index = 0
-    while index < len(array):
-        if array[index].isnumeric():
-            number = int(array[index])
-            k = 1
-            while array[index + k].isnumeric():
-                number *= 10
-                number += int(array[index + k])
-                k += 1
-            stack.push(int(number))
-            index += k
-        elif array[index] == '+' or array[index] == '-' or array[index] == '*' or array[index] == '/':
-            if not stack.is_empty():
-                y = stack.pop()
+    for i in range(len(mass) + 1):
+        for m in range(mass_limit + 1):
+            if m - mass[i - 1] >= 0:
+                cost[m][i] = max(price[i - 1] + cost[m - mass[i - 1]][i - 1], cost[m][i - 1])
             else:
-                return -1
-            if not stack.is_empty():
-                x = stack.pop()
-            else:
-                return -1
+                cost[m][i] = cost[m][i - 1]
 
-            if array[index] == '+':
-                stack.push(x + y)
-            elif array[index] == '-':
-                stack.push(x - y)
-            elif array[index] == '*':
-                stack.push(x * y)
-            else:
-                if not y == 0:
-                    stack.push(x / y)
-        index += 1
-
-    return stack.pop()
+    return cost[mass_limit][len(mass)]
 
 
-reverse_polish_notation("2,7,+")
+def test_fibbonachi_recursive_cash():
+    print("testing fibbonachi:")
 
-reverse_polish_notation("1,4,-")
-
-reverse_polish_notation("5,8,*")
-
-reverse_polish_notation("100, 25, /")
+    for k in range(20):
+        print(k, fibbonachi_recursive_cash(k))
 
 
-if __name__ == "__main__":
-    import doctest
+# test_fibbonachi_recursive_cash()
+def test_discrete_bag(algorithm):
+    print("testing discrete_bag")
+    max_mass = 10
 
-    doctest.testmod(verbose=False)
+    mass = [3, 3, 4, 5]
+    price = [30, 30, 40, 50]
+    print("test #1:", "ok" if algorithm(mass, price, max_mass) == 100 else "FAILED")
+
+    mass = [4, 9, 5, 4]
+    price = [30, 50, 40, 20]
+    print("test #2:", "ok" if algorithm(mass, price, max_mass) == 70 else "FAILED")
+
+    mass = [5, 4, 3, 2]
+    price = [200, 160, 110, 70]
+    print("test #3:", "ok" if algorithm(mass, price, max_mass) == 380 else "FAILED")
+
+
+test_discrete_bag(discrete_bag)
