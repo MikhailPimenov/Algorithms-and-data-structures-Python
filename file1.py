@@ -1,56 +1,59 @@
 # lecture 18
-# class
-# named_tuple
-# linked_list
+# class heap
+# heapify_fast
+# heap_sort
+
+from HeapSimple import HeapSimple
 
 
-class Goat:
-    legs_number = 4
+def heapify_fast(array: list):
+    heap = HeapSimple()
+    heap.values = array[:]
+    heap.length = len(array)
 
-    def __init__(self, weight=30, height=50):
-        self.weight = weight
-        self.height = height
+    for i in range(len(array) // 2 - 1, -1, -1):
+        heap.sift_down(i)
 
-    def __str__(self):
-        string = "Goat: weight = " + str(self.weight) + "  height = " + str(self.height)
-        return string
-
-
-def test_class_Goat():
-    notka = Goat()
-    nada = Goat(35, 50)
-
-    goats = [notka, nada]
-
-    for k in goats:
-        print(k)
+    for i in range(len(array)):
+        array[i] = heap.values[i]
 
 
-from collections import namedtuple
+def heap_sort(array: list):
+    heap = HeapSimple(array)
+
+    for i in range(len(array)):
+        array[i] = heap.extract_min()
 
 
-def test_namedtuple():
-    Point = namedtuple("Point", "x y z")
-    a1 = Point(2, 3, 4)
-    a2 = Point(-1, 0, 0)
-
-    distance = ((a1.x - a2.x) ** 2 + (a1.y - a2.y) ** 2 + (a1.z - a2.z) ** 2) ** 0.5
-    print(distance)
+def test_heapify_fast(algorithm):
+    array = [9, 8, 7, 10, 10, 10, 6, 5, 4, 3, 2, 1, 0, 2]
+    algorithm(array)
+    print(*array)
 
 
-def test_linked_list():
-    a = [10]
-    a.append([20])
-    a[1].append([30])
-    a[1][1].append([40])
-    a[1][1][1].append([50, None])
+def test_sort(algorithm, string: str = ""):
+    print("testing:", string)
 
-    p = a
-    while p is not None:
-        print(p[0])
-        p = p[1]
+    array = [1, 3, 4, 1, 3, 2, 0, 5, 9, 10, 6, 5]
+    array_sorted = [0, 1, 1, 2, 3, 3, 4, 5, 5, 6, 9, 10]
+    algorithm(array)
+    print("test #1:", "ok" if array == array_sorted else "FAILED")
+
+    array = [1, 3, 4, 6, 5]
+    array_sorted = [1, 3, 4, 5, 6]
+    algorithm(array)
+    print("test #2:", "ok" if array == array_sorted else "FAILED")
+
+    array = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    array_sorted = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    algorithm(array)
+    print("test #3:", "ok" if array == array_sorted else "FAILED")
+
+    array = [9, 8, 7, 6, 5, 4, 3, 2, 1]
+    array_sorted = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    algorithm(array)
+    print("test #4:", "ok" if array == array_sorted else "FAILED")
 
 
-# test_class_Goat()
-# test_namedtuple()
-test_linked_list()
+# test_heapify_fast(heapify_fast)
+test_sort(heap_sort, "heap_sort")
