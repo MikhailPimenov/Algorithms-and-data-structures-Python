@@ -1,80 +1,115 @@
-# lecture 24 part 1 of 3
+# lecture 24 part 2 of 3
 # graphs
 # depth_first_search
-# count
+# kosaraju (strongly_connected_components)
 
 
-def depth_first_search(vertex, adjacency_list: dict, in_use: set):
+def reverse_graph(adjacency_list: dict):
+    reversed_adjacency_list = {k: set() for k in adjacency_list}
+
+    for vertex in adjacency_list:
+        for neighbour in adjacency_list[vertex]:
+            reversed_adjacency_list[neighbour].add(vertex)
+
+    return reversed_adjacency_list
+
+
+def depth_first_search(vertex, adjacency_list: dict, component: set, in_use: set, used: list, first_pass: bool = True):
     in_use.add(vertex)
+    if not first_pass:
+        component.add(vertex)
 
     for neighbour in adjacency_list[vertex]:
         if neighbour not in in_use:
-            depth_first_search(neighbour, adjacency_list, in_use)
+            depth_first_search(neighbour, adjacency_list, component, in_use, used, first_pass)
+
+    if first_pass:
+        used.append(vertex)
 
 
-def count(adjacency_list: dict) -> int:
+def kosaraju(adjacency_list: dict):
     in_use = set()
+    used = []
 
-    counter = 0
     for vertex in adjacency_list:
         if vertex not in in_use:
-            counter += 1
-            depth_first_search(vertex, adjacency_list, in_use)
+            depth_first_search(vertex, adjacency_list, set(), in_use, used, True)
 
-    return counter
+    reversed_adjacency_list = reverse_graph(adjacency_list)
+
+    in_use.clear()
+    components = []
+    for k in range(len(adjacency_list)):
+        vertex = used.pop()
+
+        if vertex not in in_use:
+            component = set()
+            depth_first_search(vertex, reversed_adjacency_list, component, in_use, used, False)
+            components.append(component)
+
+    return components
 
 
-def test_depth_first_search(algorithm):
-    adjacency_list = {'A': set(),
-                      'B': set(),
-                      'C': set(),
-                      'D': set(),
-                      'E': set(),
-                      'F': set(),
-                      'G': set(),
-                      'H': set(),
-                      'I': set(), }
-    counter = algorithm(adjacency_list)
-    print("test #0:", "ok" if counter == 9 else "FAILED")
+def test_reverse(algorithm):
+    print("testing reverse_graph:")
 
-    adjacency_list = {'A': {'B', 'D'},
-                      'B': {'A', 'D', 'C'},
-                      'C': {'B', 'D'},
-                      'D': {'A', 'B', 'C'},
-                      'E': {'F', 'G'},
-                      'F': {'E', 'G'},
-                      'G': {'F'}}
-    counter = algorithm(adjacency_list)
-    print("test #1:", "ok" if counter == 2 else "FAILED")
-
-    adjacency_list = {'A': {'B', 'D'},
-                      'B': {'A', 'D', 'C'},
-                      'C': {'B', 'D'},
-                      'D': {'A', 'B', 'C'},
-                      'E': {'F', 'G'},
-                      'F': {'E', 'G'},
-                      'G': {'F'},
+    adjacency_list = {'A': {'B'},
+                      'B': {'C', 'D'},
+                      'C': {'A'},
+                      'D': {'E'},
+                      'E': {'F'},
+                      'F': {'D'},
+                      'G': {'F', 'H'},
                       'H': {'I'},
-                      'I': {'H'}}
-    counter = algorithm(adjacency_list)
-    print("test #2:", "ok" if counter == 3 else "FAILED")
+                      'I': {'M'},
+                      'M': {'G'},
+                      'K': {'M'}, }
 
-    adjacency_list = {'A': {'B', 'D'},
-                      'B': {'A', 'D', 'C'},
-                      'C': {'B', 'D'},
-                      'D': {'A', 'B', 'C'},
-                      'E': {'F', 'G'},
-                      'F': {'E', 'G'},
-                      'G': {'F'},
+    reversed_adjacency_list = {'A': {'C'},
+                               'B': {'A'},
+                               'C': {'B'},
+                               'D': {'B', 'F'},
+                               'E': {'D'},
+                               'F': {'E', 'G'},
+                               'G': {'M'},
+                               'H': {'G'},
+                               'I': {'H'},
+                               'M': {'I', 'K'},
+                               'K': set(), }
+
+    result = algorithm(adjacency_list)
+    print("test #1:", "ok" if result == reversed_adjacency_list else "FAILED")
+
+    result = algorithm(reversed_adjacency_list)
+    print("test #2:", "ok" if result == adjacency_list else "FAILED")
+
+
+def test_kosaraju(algorithm):
+    print("testing kosaraju:")
+
+    adjacency_list = {'A': {'B'},
+                      'B': {'C', 'D'},
+                      'C': {'A'},
+                      'D': {'E'},
+                      'E': {'F'},
+                      'F': {'D'},
+                      'G': {'F', 'H'},
                       'H': {'I'},
-                      'I': {'H'},
-                      'P': {'Q'},
-                      'Q': {'P'},
-                      'X': set(),
-                      'Y': set(),
-                      'Z': set()}
-    counter = algorithm(adjacency_list)
-    print("test #3:", "ok" if counter == 7 else "FAILED")
+                      'I': {'M'},
+                      'M': {'G'},
+                      'K': {'M'}, }
+
+    components1 = [{'K'}, {'G', 'M', 'I', 'H'}, {'A', 'B', 'C'}, {'D', 'F', 'E'}]
+    components2 = algorithm(adjacency_list)
+
+    success = True
+    for element in components2:
+        if element not in components1:
+            success = False
+            break
+
+    print("test #1:", "ok" if success else "FAILED")
 
 
-test_depth_first_search(count)
+test_reverse(reverse_graph)
+test_kosaraju(kosaraju)
