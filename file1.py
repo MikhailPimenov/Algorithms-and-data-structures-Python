@@ -1,108 +1,99 @@
-# lecture 24 part 3 of 3
+# lecture 25 part 1 of 3
 # graphs
-# depth_first_search
-# sort (topological_sort)
+# width_first_search
+# distances
+
+from collections import deque
 
 
-def depth_first_search(vertex, adjacency_list: dict, gray_and_black: set, gray: list, black: list):
-    gray_and_black.add(vertex)
-    gray.append(vertex)
-
-    for neighbour in adjacency_list[vertex]:
-        if neighbour in gray:
-            return False
-        cycle_not_detected = True
-        if neighbour not in gray_and_black:
-            cycle_not_detected = depth_first_search(neighbour, adjacency_list, gray_and_black, gray, black)
-        if not cycle_not_detected:
-            return False
-
-    gray.pop()
-    black.append(vertex)
-
-    return True
-
-
-def sort(adjacency_list: dict):
+def distances(vertex, adjacency_list: dict):
     gray_and_black = set()
-    black = []
 
-    for vertex in adjacency_list:
-        if vertex not in gray_and_black:
-            gray = []
-            cycle_not_detected = depth_first_search(vertex, adjacency_list, gray_and_black, gray, black)
-            if not cycle_not_detected:
-                return {}
+    distance = {k: 0 for k in adjacency_list}
+    gray_and_black.add(vertex)
+    distance[vertex] = 0
+    queue = deque(vertex)
 
-    index = {}
-    count = 0
-    for k in range(len(adjacency_list)):
-        index[count] = black.pop()
-        count += 1
+    while len(queue):
+        current_vertex = queue.popleft()
+        for neighbour in adjacency_list[current_vertex]:
+            if neighbour not in gray_and_black:
+                gray_and_black.add(neighbour)
+                queue.append(neighbour)
+                distance[neighbour] = distance[current_vertex] + 1
 
-    return index
-
-
-def test_sort(algorithm):
-    print("testing sort:")
-
-    adjacency_list = {'A': {'B'},
-                      'B': {'C'},
-                      'C': {'D'},
-                      'D': set(), }
-    index1 = {0: 'A',
-              1: 'B',
-              2: 'C',
-              3: 'D', }
-    index2 = algorithm(adjacency_list)
-    print("test #1:", "ok" if index1 == index2 else "FAILED")
-
-    adjacency_list = {'A': {'B'},
-                      'B': {'C', 'E'},
-                      'C': {'D'},
-                      'D': set(),
-                      'E': {'C', 'D'}, }
-    index1 = {0: 'A',
-              1: 'B',
-              3: 'C',
-              4: 'D',
-              2: 'E'}
-    index2 = algorithm(adjacency_list)
-    print("test #2:", "ok" if index1 == index2 else "FAILED")
-
-    adjacency_list = {'A': {'B'},
-                      'B': {'C', 'G'},
-                      'C': {'D'},
-                      'D': {'K', 'H'},
-                      'H': {'K'},
-                      'K': {'I', 'E'},
-                      'I': {'E'},
-                      'E': {'J', 'F'},
-                      'J': {'F'},
-                      'G': {'C'},
-                      'F': set(), }
-    index1 = {0: 'A',
-              1: 'B',
-              2: 'G',
-              3: 'C',
-              4: 'D',
-              5: 'H',
-              6: 'K',
-              7: 'I',
-              8: 'E',
-              9: 'J',
-              10: 'F', }
-    index2 = algorithm(adjacency_list)
-    print("test #3:", "ok" if index1 == index2 else "FAILED")
-
-    adjacency_list = {'A': {'B'},
-                      'B': {'C', 'E'},
-                      'C': {'D'},
-                      'D': set(),
-                      'E': {'C', 'A'}, }
-    index1 = {}
-    index2 = algorithm(adjacency_list)
-    print("test #4:", "ok" if index1 == index2 else "FAILED")
+    return distance
 
 
-test_sort(sort)
+def test_distances(algorithm):
+    print("testing distances:")
+
+    adjacency_list = {'A': {'B', 'C', 'D', 'E'},
+                      'B': {'A', 'C', 'F', 'G'},
+                      'C': {'A', 'C', 'D', 'J'},
+                      'D': {'A', 'L', 'K'},
+                      'E': {'M', 'N'},
+                      'F': {'B'},
+                      'G': {'B', 'H', 'I'},
+                      'H': {'G'},
+                      'I': {'G'},
+                      'J': {'C'},
+                      'K': {'O', 'P', 'D'},
+                      'L': {'R', 'S', 'D'},
+                      'M': {'T', 'E'},
+                      'N': {'E'},
+                      'O': {'K'},
+                      'P': {'K'},
+                      'R': {'L'},
+                      'S': {'L'},
+                      'T': {'M'}, }
+
+    distances1 = {'A': 0,
+                  'B': 1,
+                  'C': 1,
+                  'D': 1,
+                  'E': 1,
+                  'F': 2,
+                  'G': 2,
+                  'H': 3,
+                  'I': 3,
+                  'J': 2,
+                  'K': 2,
+                  'L': 2,
+                  'M': 2,
+                  'N': 2,
+                  'O': 3,
+                  'P': 3,
+                  'R': 3,
+                  'S': 3,
+                  'T': 3, }
+
+    distances2 = algorithm('A', adjacency_list)
+
+    print("test #1:", "ok" if distances1 == distances2 else "FAILED")
+
+    distances1 = {'A': 3,
+                  'B': 4,
+                  'C': 4,
+                  'D': 2,
+                  'E': 4,
+                  'F': 5,
+                  'G': 5,
+                  'H': 6,
+                  'I': 6,
+                  'J': 5,
+                  'K': 1,
+                  'L': 3,
+                  'M': 5,
+                  'N': 5,
+                  'O': 0,
+                  'P': 2,
+                  'R': 4,
+                  'S': 4,
+                  'T': 6, }
+
+    distances2 = algorithm('O', adjacency_list)
+    print("test #2:", "ok" if distances1 == distances2 else "FAILED")
+
+
+test_distances(distances)
