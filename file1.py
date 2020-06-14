@@ -1,131 +1,59 @@
-# lecture 25 part 2 and 3 of 3
+# lecture 26
 # graphs
 # width_first_search
-# chess_horse_path
+# dijkstra
 
 from collections import deque
 
 
-def create_vertex(k: int, j: int):
-    letters = "abcdefgh"
-    numbers = "12345678"
-
-    if 0 <= k < 8 and 0 <= j < 8:
-        vertex = letters[k] + numbers[j]
-        return vertex
-
-    return "XX"
-
-
-def add_vertex(adjacency_list: dict, k: int, j: int):
-    vertex = create_vertex(k, j)
-    adjacency_list[vertex] = set()
-
-
-def add_vertexes(adjacency_list):
-    for k in range(8):
-        for j in range(8):
-            add_vertex(adjacency_list, k, j)
-
-
-def add_edge(adjacency_list: dict, vertex1, vertex2):
-    adjacency_list[vertex1].add(vertex2)
-    adjacency_list[vertex2].add(vertex1)
-
-
-def add_edges(adjacency_list):
-    for k in range(8):
-        for j in range(8):
-            vertex1 = create_vertex(k, j)
-            if 0 <= k + 1 < 8 and 0 <= j + 2 < 8:
-                vertex2 = create_vertex(k + 1, j + 2)
-                add_edge(adjacency_list, vertex1, vertex2)
-            if 0 <= k + 2 < 8 and 0 <= j + 1 < 8:
-                vertex2 = create_vertex(k + 2, j + 1)
-                add_edge(adjacency_list, vertex1, vertex2)
-            if 0 <= k - 1 < 8 and 0 <= j + 2 < 8:
-                vertex2 = create_vertex(k - 1, j + 2)
-                add_edge(adjacency_list, vertex1, vertex2)
-            if 0 <= k - 2 < 8 and 0 <= j + 1 < 8:
-                vertex2 = create_vertex(k - 2, j + 1)
-                add_edge(adjacency_list, vertex1, vertex2)
-            if 0 <= k + 1 < 8 and 0 <= j - 2 < 8:
-                vertex2 = create_vertex(k + 1, j - 2)
-                add_edge(adjacency_list, vertex1, vertex2)
-            if 0 <= k + 2 < 8 and 0 <= j - 1 < 8:
-                vertex2 = create_vertex(k + 2, j - 1)
-                add_edge(adjacency_list, vertex1, vertex2)
-            if 0 <= k - 1 < 8 and 0 <= j - 2 < 8:
-                vertex2 = create_vertex(k - 1, j - 2)
-                add_edge(adjacency_list, vertex1, vertex2)
-            if 0 <= k - 2 < 8 and 0 <= j - 1 < 8:
-                vertex2 = create_vertex(k - 2, j - 1)
-                add_edge(adjacency_list, vertex1, vertex2)
-
-
-def create_graph():
-    adjacency_list = dict()
-
-    add_vertexes(adjacency_list)
-    add_edges(adjacency_list)
-
-    return adjacency_list
-
-
-def chess_horse_graph(start_vertex, end_vertex):
-    adjacency_list = create_graph()
-
-    distance = dict()
-    distance[start_vertex] = 0
-
-    gray_and_black = set()
-    gray_and_black.add(start_vertex)
-
+def dijkstra(start, end, adjacency_list: dict) -> list:
     queue = deque()
-    queue.append(start_vertex)
+    queue.append(start)
 
-    stop_flag = False
-    while len(queue) > 0 and not stop_flag:
+    distances = {k: float("inf") for k in adjacency_list}
+    distances[start] = 0
+
+    while queue:
         current_vertex = queue.popleft()
-
         for neighbour in adjacency_list[current_vertex]:
-            if neighbour not in gray_and_black:
-                gray_and_black.add(neighbour)
+            if distances[neighbour] > distances[current_vertex] + adjacency_list[current_vertex][neighbour]:
+                distances[neighbour] = distances[current_vertex] + adjacency_list[current_vertex][neighbour]
                 queue.append(neighbour)
-                distance[neighbour] = distance[current_vertex] + 1
-                if neighbour == end_vertex:
-                    stop_flag = True
 
-    path = list()
-    path.append(end_vertex)
-
-    current_vertex = end_vertex
-    for k in range(distance[end_vertex]):
+    path = [end]
+    current_vertex = end
+    while current_vertex != start:
         for neighbour in adjacency_list[current_vertex]:
-            if neighbour in gray_and_black:
-                if distance[neighbour] == distance[current_vertex] - 1:
-                    path.append(neighbour)
-                    current_vertex = neighbour
-                    break
+            if distances[neighbour] == distances[current_vertex] - adjacency_list[current_vertex][neighbour]:
+                path.append(neighbour)
+                current_vertex = neighbour
+                break
 
     path.reverse()
-    return path
+    return [distances[end], path]
 
 
-def test_chess_horse_graph(algorithm):
-    start_vertex = "f7"
-    end_vertex = "f6"
-    path = algorithm(start_vertex, end_vertex)
+def test_dijkstra(algorithm):
+    print("testing: dijkstra")
+    adjacency_list = {
+        'A': {'B': 2, 'H': 15},
+        'B': {'C': 1, 'D': 5, 'A': 2},
+        'C': {'B': 1, 'D': 3, 'F': 2, 'G': 1},
+        'D': {'B': 5, 'C': 3, 'F': 4, 'E': 6},
+        'E': {'D': 6, 'F': 7, 'I': 2},
+        'F': {'G': 1, 'C': 2, 'D': 4, 'E': 7, 'H': 3},
+        'G': {'C': 1, 'F': 1},
+        'H': {'F': 3, 'I': 12, 'A': 15},
+        'I': {'E': 2, 'H': 12}
+    }
 
-    print("Path from", start_vertex, "to", end_vertex, ":")
-    print(*path)
+    start = 'A'
+    end = 'I'
 
-    start_vertex = "a1"
-    end_vertex = "h8"
-    path = algorithm(start_vertex, end_vertex)
+    result = algorithm(start, end, adjacency_list)
 
-    print("Path from", start_vertex, "to", end_vertex, ":")
-    print(*path)
+    print("Path from", start, "to", end, "costs", result[0], ":")
+    print(*(result[1]))
 
 
-test_chess_horse_graph(chess_horse_graph)
+test_dijkstra(dijkstra)
