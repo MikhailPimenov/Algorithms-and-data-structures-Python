@@ -1,59 +1,95 @@
-# lecture 26
+# lecture 28
 # graphs
-# width_first_search
-# dijkstra
-
-from collections import deque
+# floyd_uolsher
 
 
-def dijkstra(start, end, adjacency_list: dict) -> list:
-    queue = deque()
-    queue.append(start)
 
-    distances = {k: float("inf") for k in adjacency_list}
-    distances[start] = 0
+def calculate_max(adjacency_list: dict):
+    result = 0
 
-    while queue:
-        current_vertex = queue.popleft()
-        for neighbour in adjacency_list[current_vertex]:
-            if distances[neighbour] > distances[current_vertex] + adjacency_list[current_vertex][neighbour]:
-                distances[neighbour] = distances[current_vertex] + adjacency_list[current_vertex][neighbour]
-                queue.append(neighbour)
+    for k in adjacency_list:
+        for i in adjacency_list[k]:
+            result += adjacency_list[k][i]
 
-    path = [end]
-    current_vertex = end
-    while current_vertex != start:
-        for neighbour in adjacency_list[current_vertex]:
-            if distances[neighbour] == distances[current_vertex] - adjacency_list[current_vertex][neighbour]:
-                path.append(neighbour)
-                current_vertex = neighbour
-                break
-
-    path.reverse()
-    return [distances[end], path]
+    return result * 10
 
 
-def test_dijkstra(algorithm):
-    print("testing: dijkstra")
+def create_indexes(adjacency_list: dict):
+    indexes = dict()
+
+    index = 0
+    for k in adjacency_list:
+        indexes[k] = index
+        index += 1
+
+    return indexes
+
+
+def create_distances(adjacency_list: dict, index: dict):
+    unreachable_max = calculate_max(adjacency_list)
+
+    distances = [[unreachable_max] * len(adjacency_list) for k in range(len(adjacency_list))]
+
+    for j in adjacency_list:
+        distances[index[j]][index[j]] = 0
+        for i in adjacency_list[j]:
+            distances[index[j]][index[i]] = adjacency_list[j][i]
+
+    return distances
+
+
+def floyd_uolsher(adjacency_list: dict):
+    index = create_indexes(adjacency_list)
+    distances = create_distances(adjacency_list, index)
+
+    temp = distances[:]
+
+    for k in adjacency_list:
+        for i in adjacency_list:
+            for j in adjacency_list:
+                distances[index[i]][index[j]] = min(temp[index[i]][index[j]],
+                                                    temp[index[i]][index[k]] + temp[index[k]][index[j]])
+        temp = distances[:]
+
+    return distances
+
+
+def test_floyd_uolsher(algorithm):
+    print("testing: floyd_uolsher")
     adjacency_list = {
-        'A': {'B': 2, 'H': 15},
-        'B': {'C': 1, 'D': 5, 'A': 2},
-        'C': {'B': 1, 'D': 3, 'F': 2, 'G': 1},
-        'D': {'B': 5, 'C': 3, 'F': 4, 'E': 6},
-        'E': {'D': 6, 'F': 7, 'I': 2},
-        'F': {'G': 1, 'C': 2, 'D': 4, 'E': 7, 'H': 3},
-        'G': {'C': 1, 'F': 1},
-        'H': {'F': 3, 'I': 12, 'A': 15},
-        'I': {'E': 2, 'H': 12}
+        'A': {'B': 2,
+              'H': 15},
+        'B': {'C': 1,
+              'D': 5,
+              'A': 2},
+        'C': {'B': 1,
+              'D': 3,
+              'F': 2,
+              'G': 1},
+        'D': {'B': 5,
+              'C': 3,
+              'F': 4,
+              'E': 6},
+        'E': {'D': 6,
+              'F': 7,
+              'I': 2},
+        'F': {'G': 1,
+              'C': 2,
+              'D': 4,
+              'E': 7,
+              'H': 3},
+        'G': {'C': 1,
+              'F': 1},
+        'H': {'F': 3,
+              'I': 12,
+              'A': 15},
+        'I': {'E': 2,
+              'H': 12}
     }
 
-    start = 'A'
-    end = 'I'
-
-    result = algorithm(start, end, adjacency_list)
-
-    print("Path from", start, "to", end, "costs", result[0], ":")
-    print(*(result[1]))
+    distances = floyd_uolsher(adjacency_list)
+    for k in distances:
+        print(*k)
 
 
-test_dijkstra(dijkstra)
+test_floyd_uolsher(calculate_max)
