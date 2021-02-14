@@ -1,5 +1,5 @@
 import unittest
-from .path import path as algorithm
+from .path2 import path as algorithm
 
 
 class MyTestCase(unittest.TestCase):

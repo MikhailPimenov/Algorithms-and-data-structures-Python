@@ -1,5 +1,5 @@
 import unittest
-from .chess_queen import chess_queen as algorithm
+from .chess_queen2 import chess_queen as algorithm
 
 
 class MyTestCase(unittest.TestCase):

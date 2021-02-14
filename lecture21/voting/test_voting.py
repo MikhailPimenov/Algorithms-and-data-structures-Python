@@ -1,5 +1,5 @@
 import unittest
-from .voting import voting as algorithm
+from .voting2 import voting as algorithm
 
 
 class MyTestCase(unittest.TestCase):

@@ -1,7 +1,9 @@
 def is_sorted_graph(adjacency_lists: dict, numbers: dict) -> bool:
-    if len(adjacency_lists) == 0 or len(numbers) == 0:
+    if type(numbers) != dict:
         return False
 
+    if len(adjacency_lists) == 0 or len(numbers) == 0:
+        return False
 
     length = calculate_range(numbers)
     if length != len(numbers):

@@ -1,5 +1,5 @@
 import unittest
-from .tarjan import tarjan as algorithm
+from .tarjan2 import tarjan as algorithm
 from .is_sorted_graph import is_sorted_graph
 
 

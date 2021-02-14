@@ -1,5 +1,5 @@
 import unittest
-from .longest_common_subsequence import longest_common_subsequence as algorithm
+from .longest_common_subsequence2 import longest_common_subsequence as algorithm
 
 
 class MyTestCase(unittest.TestCase):

@@ -7,7 +7,7 @@ def p_function(string: list):
             if string[index] == string[p_array[p_index]]:
                 p_array[index] = 1 + p_array[p_index]
                 break
-            if p_index == 0:
+            if not p_index:
                 break
             p_index = p_array[p_index]
 

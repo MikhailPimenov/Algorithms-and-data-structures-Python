@@ -1,5 +1,5 @@
 import unittest
-from .binary_search import binary_search as algorithm
+from .binary_search2 import binary_search as algorithm
 
 
 class MyTestCase(unittest.TestCase):
@@ -8,35 +8,35 @@ class MyTestCase(unittest.TestCase):
 
         element = 0
         result = algorithm(array, element)
-        self.assertEqual(result, [False, -1, 0])
+        self.assertEqual(result, (False, -1, 0))
 
         element = 12
         result = algorithm(array, element)
-        self.assertEqual(result, [False, 19, 20])
+        self.assertEqual(result, (False, 19, 20))
 
         element = 1
         result = algorithm(array, element)
-        self.assertEqual(result, [True, -1, 5])
+        self.assertEqual(result, (True, -1, 5))
 
         element = 2
         result = algorithm(array, element)
-        self.assertEqual(result, [True, 4, 7])
+        self.assertEqual(result, (True, 4, 7))
 
         element = 3
         result = algorithm(array, element)
-        self.assertEqual(result, [True, 6, 8])
+        self.assertEqual(result, (True, 6, 8))
 
         element = 5
         result = algorithm(array, element)
-        self.assertEqual(result, [False, 10, 11])
+        self.assertEqual(result, (False, 10, 11))
 
         element = 7
         result = algorithm(array, element)
-        self.assertEqual(result, [True, 12, 18])
+        self.assertEqual(result, (True, 12, 18))
 
         element = 8
         result = algorithm(array, element)
-        self.assertEqual(result, [True, 17, 19])
+        self.assertEqual(result, (True, 17, 19))
 
 
 

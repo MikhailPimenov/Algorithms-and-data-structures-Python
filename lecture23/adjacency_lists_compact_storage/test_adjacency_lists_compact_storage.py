@@ -1,5 +1,5 @@
 import unittest
-from .adjacency_lists_compact_storage import adjacency_lists_compact_storage as algorithm
+from .adjacency_lists_compact_storage2 import adjacency_lists_compact_storage as algorithm
 
 
 class MyTestCase(unittest.TestCase):

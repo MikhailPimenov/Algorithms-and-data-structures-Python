@@ -1,5 +1,5 @@
 import unittest
-from .generate_permutations import generate_permutations as algorithm
+from .generate_permutations2 import generate_permutations as algorithm
 
 
 class MyTestCase(unittest.TestCase):

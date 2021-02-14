@@ -1,5 +1,5 @@
 import unittest
-from .horse import horse as algorithm
+from .horse2 import horse as algorithm
 
 
 class MyTestCase(unittest.TestCase):
@@ -18,7 +18,7 @@ class MyTestCase(unittest.TestCase):
         print(*result)
         print("->", v2)
 
-        self.assertEqual(True, False)
+        # self.assertEqual(True, False)
 
 
 if __name__ == '__main__':

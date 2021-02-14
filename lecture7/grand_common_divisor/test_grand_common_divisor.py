@@ -1,5 +1,5 @@
 import unittest
-from .grand_common_divisor import grand_common_divisor
+from .grand_common_divisor2 import grand_common_divisor
 
 
 class MyTestCase(unittest.TestCase):

@@ -1,5 +1,5 @@
 import unittest
-from .p_function import p_function as algorithm
+from .p_function2 import p_function as algorithm
 
 
 class MyTestCase(unittest.TestCase):

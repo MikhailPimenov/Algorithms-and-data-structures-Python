@@ -1,5 +1,5 @@
 import unittest
-from .adjacency_matrix import adjacency_matrix as algorithm
+from .adjacency_matrix2 import adjacency_matrix as algorithm
 
 
 class MyTestCase(unittest.TestCase):

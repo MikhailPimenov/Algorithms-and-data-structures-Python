@@ -1,5 +1,5 @@
 import unittest
-from .connected_components import connected_components as algorithm
+from .connected_components2 import connected_components as algorithm
 
 
 class MyTestCase(unittest.TestCase):

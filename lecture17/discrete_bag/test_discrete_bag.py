@@ -1,5 +1,5 @@
 import unittest
-from .discrete_bag import discrete_bag as algorithm
+from .discrete_bag2 import discrete_bag as algorithm
 
 
 class MyTestCase(unittest.TestCase):

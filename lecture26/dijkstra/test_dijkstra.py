@@ -1,5 +1,5 @@
 import unittest
-from .dijkstra import dijkstra as algorithm
+from .dijkstra2 import dijkstra as algorithm
 
 
 class MyTestCase(unittest.TestCase):
@@ -51,8 +51,8 @@ class MyTestCase(unittest.TestCase):
                   'G': 4,
                   'H': 8,
                   'I': 14,
-                  'J':None,
-                  'K':None}
+                  'J': None,
+                  'K': None}
         result = algorithm(adjacency_lists, start)
         self.assertEqual(answer, result, "test #2")
 

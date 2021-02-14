@@ -1,5 +1,5 @@
 import unittest
-from .brace_sequence import brace_sequence as algorithm
+from .brace_sequence2 import brace_sequence as algorithm
 
 
 class MyTestCase(unittest.TestCase):

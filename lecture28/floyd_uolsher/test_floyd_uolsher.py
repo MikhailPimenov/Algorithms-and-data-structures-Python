@@ -1,5 +1,5 @@
 import unittest
-from .floyd_uolsher import floyd_uolsher as algorithm
+from .floyd_uolsher2 import floyd_uolsher as algorithm
 from lecture26.dijkstra.dijkstra import dijkstra
 
 

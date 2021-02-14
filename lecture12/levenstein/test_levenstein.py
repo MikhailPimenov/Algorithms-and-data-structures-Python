@@ -1,5 +1,5 @@
 import unittest
-from .levenstein import levenstein as algorithm
+from .levenstein2 import levenstein as algorithm
 
 
 class MyTestCase(unittest.TestCase):

@@ -1,5 +1,5 @@
 import unittest
-from .reversed_polish_notation import reversed_polish_notation as algorithm
+from .reversed_polish_notation2 import reversed_polish_notation as algorithm
 
 
 class MyTestCase(unittest.TestCase):

@@ -32,4 +32,4 @@ def binary_search(elements: list, element):
 
     result = ((right - left) > 1)
 
-    return [result, left, right]
+    return (result, left, right)

@@ -1,5 +1,6 @@
 _stack = []
 
+
 def push(element):
     _stack.append(element)
 
