@@ -1,5 +1,6 @@
 import unittest
-from .invert_array import invert_array
+from .invert_array2 import invert_array
+
 
 class MyTestCase(unittest.TestCase):
     def test_something(self):
