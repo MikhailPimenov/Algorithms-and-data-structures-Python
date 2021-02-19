@@ -4,7 +4,13 @@ import unittest
 # from lecture6.selection_sort.selection_sort2 import selection_sort as algorithm
 # from lecture9.hoar_sort.hoar_sort2 import hoar_sort as algorithm
 # from lecture9.merge_sort.merge_sort2 import merge_sort as algorithm
-from lecture19.heap_sort.heap_sort2 import heap_sort as algorithm
+# from lecture19.heap_sort.heap_sort2 import heap_sort as algorithm
+# from lecture6.bubble_sort.bubble_sort3 import bubble_sort3 as algorithm
+# from lecture6.insert_sort.insert_sort3 import insert_sort3 as algorithm
+# from lecture6.selection_sort.selection_sort3 import selection_sort3 as algorithm
+# from lecture19.heap_sort.heap_sort3 import heap_sort3 as algorithm
+# from lecture9.merge_sort.merge_sort3 import merge_sort3 as algorithm
+from lecture9.hoar_sort.hoar_sort3 import hoar_sort3 as algorithm
 
 
 class MyTestCase(unittest.TestCase):
