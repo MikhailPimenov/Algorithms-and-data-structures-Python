@@ -1,5 +1,6 @@
 import unittest
-from .generate_numbers2 import generate_numbers as algorithm
+# from .generate_numbers2 import generate_numbers as algorithm
+from .generate_numbers3 import generate_numbers3 as algorithm
 
 
 class MyTestCase(unittest.TestCase):
@@ -11,7 +12,6 @@ class MyTestCase(unittest.TestCase):
         self.assertRaises(ArithmeticError, algorithm, 3, -4)
         self.assertRaises(ArithmeticError, algorithm, -3, 4)
         self.assertRaises(ArithmeticError, algorithm, 19, 5)
-
 
 
 if __name__ == '__main__':
