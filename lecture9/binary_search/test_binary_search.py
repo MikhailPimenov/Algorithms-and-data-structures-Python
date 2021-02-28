@@ -1,5 +1,6 @@
 import unittest
-from .binary_search2 import binary_search as algorithm
+# from .binary_search2 import binary_search as algorithm
+from .binary_search3 import binary_search3 as algorithm
 
 
 class MyTestCase(unittest.TestCase):
@@ -37,7 +38,6 @@ class MyTestCase(unittest.TestCase):
         element = 8
         result = algorithm(array, element)
         self.assertEqual(result, (True, 17, 19))
-
 
 
 if __name__ == '__main__':
