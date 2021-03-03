@@ -1,5 +1,6 @@
 import unittest
-from .trajectory_tracing2 import trajectory_tracing as algorithm
+# from .trajectory_tracing2 import trajectory_tracing as algorithm
+from .trajectory_tracing3 import trajectory_tracing3 as algorithm
 
 
 class MyTestCase(unittest.TestCase):
