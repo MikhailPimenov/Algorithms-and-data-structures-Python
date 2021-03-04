@@ -2,6 +2,9 @@ import unittest
 from .longest_common_subsequence2 import longest_common_subsequence as algorithm
 
 
+# from .longest_common_subsequence3 import longest_common_subsequence3 as algorithm
+
+
 class MyTestCase(unittest.TestCase):
     def test_something(self):
         sequence1 = [0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 4, 0, 0, 0, 5]
@@ -121,6 +124,14 @@ class MyTestCase(unittest.TestCase):
         result = algorithm(sequence1, sequence2)
         self.assertEqual(len(result), len(subsequence), "test #9")
         self.assertEqual(result, subsequence, "test #9.1")
+
+        sequence1 = [1, 1, 4, 3, 2, 5]
+        sequence2 = [1, 3, 2, 6, 6, 6]
+        subsequence = [1, 3, 2]
+
+        result = algorithm(sequence1, sequence2)
+        self.assertEqual(len(result), len(subsequence), "test #10")
+        self.assertEqual(result, subsequence, "test #10.1")
 
 
 if __name__ == '__main__':

@@ -1,5 +1,6 @@
 import unittest
-from .longest_increasing_subsequence2 import longest_increasing_subsequence as algorithm
+# from .longest_increasing_subsequence2 import longest_increasing_subsequence as algorithm
+from .longest_increasing_subsequence3 import longest_increasing_subsequence3 as algorithm
 
 
 class MyTestCase(unittest.TestCase):
@@ -29,13 +30,13 @@ class MyTestCase(unittest.TestCase):
         # self.assertEqual(result, subsequence, "test #4.1")
 
         sequence = [4, 1, 2, 0]
-        subsequence = [ 1, 2 ]
+        subsequence = [1, 2]
         result = algorithm(sequence)
         self.assertEqual(len(result), len(subsequence), "test #5")
         # self.assertEqual(result, subsequence, "test #5.1")
 
         sequence = [9, 8, 7, 1, 6, 2, 3]
-        subsequence = [1, 2, 3 ]
+        subsequence = [1, 2, 3]
         result = algorithm(sequence)
         self.assertEqual(len(result), len(subsequence), "test #6")
         # self.assertEqual(result, subsequence, "test #6.1")
@@ -64,7 +65,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(len(result), len(subsequence), "test #10")
         # self.assertEqual(result, subsequence, "test #10.1")
 
-        sequence = [ 4, 5, 1, 2, 0, 3, 3, 3, 0, 0, 1 ]
+        sequence = [4, 5, 1, 2, 0, 3, 3, 3, 0, 0, 1]
         subsequence = [1, 2, 3]
         result = algorithm(sequence)
         self.assertEqual(len(result), len(subsequence), "test #11")

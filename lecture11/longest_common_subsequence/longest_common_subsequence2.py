@@ -24,11 +24,12 @@ def reveal_longest_common_subsequence(a: list, b: list, f: list):
     m = len(b)
     r = f[len(a)][len(b)]
     while k > 0 and m > 0:
-        if f[k - 1][m] == f[k][m - 1] and f[k - 1][m] < f[k][m]:
-            result[r - 1] = a[k - 1]
+        if f[k - 1][m] == f[k][m - 1]:
+            if f[k - 1][m] < f[k][m]:
+                result[r - 1] = a[k - 1]
+                r -= 1
             k -= 1
             m -= 1
-            r -= 1
         elif f[k - 1][m] > f[k][m - 1]:
             k -= 1
         else:
