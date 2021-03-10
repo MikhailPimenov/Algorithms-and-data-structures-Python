@@ -1,5 +1,6 @@
 import unittest
-from .p_function2 import p_function as algorithm
+# from .p_function2 import p_function as algorithm
+from .p_function3 import p_function3 as algorithm
 
 
 class MyTestCase(unittest.TestCase):
@@ -33,6 +34,19 @@ class MyTestCase(unittest.TestCase):
         p_array = [0, 0, 1]
         result = algorithm(string)
         self.assertEqual(p_array, result, "test #6")
+
+        string = "pig is big#pig pig pig is very big pig pig is big"
+        p_array = [
+            0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 1, 2, 3,
+            4, 1, 2, 3, 4, 1, 2,
+            3, 4, 5, 6, 7, 0, 0,
+            0, 0, 0, 0, 0, 0, 0,
+            1, 2, 3, 4, 1, 2, 3,
+            4, 5, 6, 7, 8, 9, 10
+        ]
+        result = algorithm(string)
+        self.assertEqual(p_array, result, "test #7")
 
 
 if __name__ == '__main__':
