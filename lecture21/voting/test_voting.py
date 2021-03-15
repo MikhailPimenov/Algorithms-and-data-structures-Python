@@ -1,10 +1,11 @@
 import unittest
-from .voting2 import voting as algorithm
+# from .voting2 import voting as algorithm
+from .election3 import election3 as algorithm
 
 
 class MyTestCase(unittest.TestCase):
     def test_something(self):
-        stream = [10,
+        stream = (10,
                   "Arkady",
                   "Arkady",
                   "Andrew",
@@ -14,7 +15,7 @@ class MyTestCase(unittest.TestCase):
                   "Arkady",
                   "Anton",
                   "Anton",
-                  "Arkady"]
+                  "Arkady")
         answer = {"Arkady": 5,
                   "Anton": 3,
                   "Andrew": 2}
