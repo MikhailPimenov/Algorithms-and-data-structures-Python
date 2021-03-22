@@ -1,6 +1,8 @@
 import unittest
-from .floyd_uolsher2 import floyd_uolsher as algorithm
-from lecture26.dijkstra.dijkstra import dijkstra
+# from .floyd_uolsher2 import floyd_uolsher as algorithm
+# from lecture26.dijkstra.dijkstra import dijkstra
+from lecture26.dijkstra.dijkstra3 import dijkstra3 as dijkstra
+from .floyd_uolsher3 import floyd_uolsher3 as algorithm
 
 
 class MyTestCase(unittest.TestCase):
