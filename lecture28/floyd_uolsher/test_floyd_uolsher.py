@@ -1,6 +1,8 @@
 import unittest
-from .floyd_uolsher2 import floyd_uolsher as algorithm
-from lecture26.dijkstra.dijkstra import dijkstra
+# from .floyd_uolsher2 import floyd_uolsher as algorithm
+# from lecture26.dijkstra.dijkstra import dijkstra
+from lecture26.dijkstra.dijkstra3 import dijkstra3 as dijkstra
+from .floyd_uolsher3 import floyd_uolsher3 as algorithm
 
 
 class MyTestCase(unittest.TestCase):
@@ -51,7 +53,7 @@ class MyTestCase(unittest.TestCase):
             'A': {'T': 18, 'B': 4, 'C': 1, 'H': 6, 'I': 7, 'N': 1},
             'B': {'A': 4, 'D': 5, 'O': 4},
             'C': {'A': 1, 'D': 5, 'H': 3, 'G': 7},
-            'D': {'B': 5, 'O': 8, 'E': 4, 'F': 5, 'C':5},
+            'D': {'B': 5, 'O': 8, 'E': 4, 'F': 5, 'C': 5},
             'E': {'O': 8, 'N': 8, 'M': 9, 'F': 3, 'D': 4},
             'F': {'D': 5, 'E': 3, 'M': 6, 'L': 6, 'K': 3, 'G': 2},
             'G': {'C': 7, 'F': 2, 'K': 2, 'H': 4},
