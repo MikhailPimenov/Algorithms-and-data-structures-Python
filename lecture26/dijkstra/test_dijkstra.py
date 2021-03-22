@@ -1,5 +1,6 @@
 import unittest
-from .dijkstra2 import dijkstra as algorithm
+# from .dijkstra2 import dijkstra as algorithm
+from .dijkstra3 import dijkstra3 as algorithm
 
 
 class MyTestCase(unittest.TestCase):
