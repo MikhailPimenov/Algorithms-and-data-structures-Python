@@ -1,5 +1,6 @@
 import unittest
-from .kosaraju2 import kosaraju as algorithm
+# from .kosaraju2 import kosaraju as algorithm
+from .kosaraju3 import kosaraju3 as algorithm
 
 
 class MyTestCase(unittest.TestCase):
