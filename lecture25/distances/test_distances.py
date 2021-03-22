@@ -1,5 +1,6 @@
 import unittest
-from .distances2 import distances as algorithm
+# from .distances2 import distances as algorithm
+from .distances3 import distances3 as algorithm
 
 
 class MyTestCase(unittest.TestCase):

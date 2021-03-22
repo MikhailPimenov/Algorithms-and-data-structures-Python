@@ -1,5 +1,6 @@
 import unittest
-from .path2 import path as algorithm
+# from .path2 import path as algorithm
+from .path3 import path3 as algorithm
 
 
 class MyTestCase(unittest.TestCase):
@@ -28,19 +29,17 @@ class MyTestCase(unittest.TestCase):
             'U': {'I', 'Q'},
             'V': {'R', 'P'}
         }
-        answer = ['G','D','J']
-        result = algorithm(adjacency_lists, 'G','J')
+        answer = ['G', 'D', 'J']
+        result = algorithm(adjacency_lists, 'G', 'J')
         self.assertEqual(answer, result, "test #1")
 
-        answer = ['A','N','O','T']
-        result = algorithm(adjacency_lists, 'A','T')
+        answer = ['A', 'N', 'O', 'T']
+        result = algorithm(adjacency_lists, 'A', 'T')
         self.assertEqual(answer, result, "test #2")
 
-        answer = ['G','A','B']
-        result = algorithm(adjacency_lists, 'G','B')
+        answer = ['G', 'A', 'B']
+        result = algorithm(adjacency_lists, 'G', 'B')
         self.assertEqual(answer, result, "test #3")
-
-
 
 
 if __name__ == '__main__':
