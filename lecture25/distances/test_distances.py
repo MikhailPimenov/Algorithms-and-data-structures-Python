@@ -1,23 +1,24 @@
 import unittest
 # from .distances2 import distances as algorithm
-from .distances3 import distances3 as algorithm
+# from .distances3 import distances3 as algorithm
+from .distances4 import distances4 as algorithm
 
 
 class MyTestCase(unittest.TestCase):
     def test_something(self):
         adjacency_lists = {
             'A': {'B', 'C', 'D', 'E', 'F'},
-            'B': {'A','G', 'H'},
-            'C': {'A','I', 'J'},
-            'D': {'A','K'},
-            'E': {'A','L', 'M'},
-            'F': {'F','O', 'N'},
-            'G': {'B','P', 'Q'},
-            'H': {'B','R', 'S'},
-            'I': {'C','T', 'V'},
-            'J': {'C','U', 'W'},
-            'K': {'D','X', 'Y'},
-            'L': {'E','Z'},
+            'B': {'A', 'G', 'H'},
+            'C': {'A', 'I', 'J'},
+            'D': {'A', 'K'},
+            'E': {'A', 'L', 'M'},
+            'F': {'F', 'O', 'N'},
+            'G': {'B', 'P', 'Q'},
+            'H': {'B', 'R', 'S'},
+            'I': {'C', 'T', 'V'},
+            'J': {'C', 'U', 'W'},
+            'K': {'D', 'X', 'Y'},
+            'L': {'E', 'Z'},
             'M': {'E'},
             'N': {'F'},
             'O': {'F'},

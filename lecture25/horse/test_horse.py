@@ -1,6 +1,7 @@
 import unittest
 # from .horse2 import horse as algorithm
-from .horse_path3 import horse_path3 as algorithm
+# from .horse_path3 import horse_path3 as algorithm
+from .horse_path4 import horse_path4 as algorithm
 
 
 class MyTestCase(unittest.TestCase):

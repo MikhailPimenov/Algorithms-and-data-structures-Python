@@ -1,6 +1,7 @@
 import unittest
 # from .connected_components2 import connected_components as algorithm
-from .count_connected_components3 import count_connected_components3 as algorithm
+# from .count_connected_components3 import count_connected_components3 as algorithm
+from .count_connected_components4 import count_connected_components4 as algorithm
 
 
 class MyTestCase(unittest.TestCase):

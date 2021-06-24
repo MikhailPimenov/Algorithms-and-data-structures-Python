@@ -1,6 +1,7 @@
 import unittest
 # from .knuth_morris_pratt2 import knuth_morris_pratt as algorithm
-from .knuth_morris_pratt3 import knuth_morris_pratt3 as algorithm
+# from .knuth_morris_pratt3 import knuth_morris_pratt3 as algorithm
+from .knuth_morris_pratt4 import knuth_morris_pratt4 as algorithm
 
 
 class MyTestCase(unittest.TestCase):

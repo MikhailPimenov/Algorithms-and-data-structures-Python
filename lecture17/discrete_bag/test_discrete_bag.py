@@ -1,6 +1,7 @@
 import unittest
-from .discrete_bag2 import discrete_bag as algorithm
-from .discrete_bag3 import discrete_bag3 as algorithm
+# from .discrete_bag2 import discrete_bag as algorithm
+# from .discrete_bag3 import discrete_bag3 as algorithm
+from .discrete_bag4 import discrete_bag4 as algorithm
 
 
 class MyTestCase(unittest.TestCase):

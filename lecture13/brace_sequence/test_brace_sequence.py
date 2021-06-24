@@ -1,6 +1,7 @@
 import unittest
 # from .brace_sequence2 import brace_sequence as algorithm
-from .brace_sequence3 import brace_sequence3 as algorithm
+# from .brace_sequence3 import brace_sequence3 as algorithm
+from .brace_sequence4 import brace_sequence4 as algorithm
 
 
 class MyTestCase(unittest.TestCase):
@@ -31,7 +32,6 @@ class MyTestCase(unittest.TestCase):
 
         sequence = ")"
         self.assertEqual(algorithm(sequence), False, "test #9")
-
 
 
 if __name__ == '__main__':

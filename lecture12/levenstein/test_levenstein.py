@@ -1,6 +1,7 @@
 import unittest
 # from .levenstein2 import levenstein as algorithm
-from .levenstein3 import levenstein3 as algorithm
+# from .levenstein3 import levenstein3 as algorithm
+from .levenstein4 import levenstein4 as algorithm
 
 
 class MyTestCase(unittest.TestCase):
