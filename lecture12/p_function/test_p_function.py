@@ -1,7 +1,8 @@
 import unittest
 # from .p_function2 import p_function as algorithm
 # from .p_function3 import p_function3 as algorithm
-from .p_function4 import p_function4 as algorithm
+# from .p_function4 import p_function4 as algorithm
+from .p_function5 import p_function5 as algorithm
 
 
 class MyTestCase(unittest.TestCase):

@@ -1,7 +1,8 @@
 import unittest
 # from .longest_increasing_subsequence2 import longest_increasing_subsequence as algorithm
 # from .longest_increasing_subsequence3 import longest_increasing_subsequence3 as algorithm
-from .longest_increasing_subsequence4 import longest_increasing_subsequence4 as algorithm
+# from .longest_increasing_subsequence4 import longest_increasing_subsequence4 as algorithm
+from .longest_increasing_subsequence5 import longest_increasing_subsequence5 as algorithm
 
 
 class MyTestCase(unittest.TestCase):

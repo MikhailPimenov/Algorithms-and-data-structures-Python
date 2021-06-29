@@ -3,7 +3,9 @@ import unittest
 # from lecture26.dijkstra.dijkstra import dijkstra
 from lecture26.dijkstra.dijkstra3 import dijkstra3 as dijkstra
 # from .floyd_uolsher3 import floyd_uolsher3 as algorithm
-from .floyd_uolsher4 import floyd_uolsher4 as algorithm
+# from .floyd_uolsher4 import floyd_uolsher4 as algorithm
+from lecture28.floyd_uolsher.floyd_uolsher5 import floyd_uolsher5 as algorithm
+
 
 class MyTestCase(unittest.TestCase):
     def test_something(self):
