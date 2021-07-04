@@ -2,7 +2,8 @@ import unittest
 # from .tarjan2 import tarjan as algorithm
 from .is_sorted_graph import is_sorted_graph
 # from .tarjan3 import tarjan3 as algorithm
-from .tarjan4 import tarjan4 as algorithm
+# from .tarjan4 import tarjan4 as algorithm
+from .tarjan5 import tarjan5 as algorithm
 
 
 class MyTestCase(unittest.TestCase):

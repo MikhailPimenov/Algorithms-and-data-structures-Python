@@ -1,7 +1,9 @@
 import unittest
 # from .dijkstra2 import dijkstra as algorithm
 # from .dijkstra3 import dijkstra3 as algorithm
-from .dijkstra4 import dijkstra4 as algorithm
+# from .dijkstra4 import dijkstra4 as algorithm
+from .dijkstra5 import dijkstra5 as algorithm
+
 
 class MyTestCase(unittest.TestCase):
     def test_something(self):

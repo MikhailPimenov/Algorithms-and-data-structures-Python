@@ -1,7 +1,8 @@
 import unittest
 # from .path2 import path as algorithm
 # from .path3 import path3 as algorithm
-from .path4 import path4 as algorithm
+# from .path4 import path4 as algorithm
+from .path5 import path5 as algorithm
 
 
 class MyTestCase(unittest.TestCase):
