@@ -1,7 +1,8 @@
 import unittest
 # from .reversed_polish_notation2 import reversed_polish_notation as algorithm
 # from .reversed_polish_notation3 import reversed_polish_notation3 as algorithm
-from .reversed_polish_notation4 import reversed_polish_notation4 as algorithm
+# from .reversed_polish_notation4 import reversed_polish_notation4 as algorithm
+from .reversed_polish_notation5 import reversed_polish_notation5 as algorithm
 
 
 class MyTestCase(unittest.TestCase):

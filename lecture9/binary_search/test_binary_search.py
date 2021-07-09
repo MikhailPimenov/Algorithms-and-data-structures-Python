@@ -1,6 +1,7 @@
 import unittest
 # from .binary_search2 import binary_search as algorithm
-from .binary_search3 import binary_search3 as algorithm
+# from .binary_search3 import binary_search3 as algorithm
+from .binary_search5 import binary_search5 as algorithm
 
 
 class MyTestCase(unittest.TestCase):

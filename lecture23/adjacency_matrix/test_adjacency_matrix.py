@@ -1,7 +1,8 @@
 import unittest
 # from .adjacency_matrix2 import adjacency_matrix as algorithm
 # from .adjacency_matrix3 import adjacency_matrix3 as algorithm
-from .adjacency_matrix4 import adjacency_matrix4 as algorithm
+# from .adjacency_matrix4 import adjacency_matrix4 as algorithm
+from .adjacency_matrix5 import adjacency_matrix5 as algorithm
 
 
 class MyTestCase(unittest.TestCase):

@@ -1,8 +1,13 @@
 import unittest
-from .fibonacci3 import fibonacci3 as recursive_algorithm
-from .fibonacci3 import fibonacci_cached3 as cached_recursive_algorithm
-from .fibonacci3 import fibonacci_fast3 as dynamic_programming_algorithm
-from .fibonacci3 import fibonacci_generator3 as generator_algorithm
+# from .fibonacci3 import fibonacci3 as recursive_algorithm
+# from .fibonacci3 import fibonacci_cached3 as cached_recursive_algorithm
+# from .fibonacci3 import fibonacci_fast3 as dynamic_programming_algorithm
+# from .fibonacci3 import fibonacci_generator3 as generator_algorithm
+
+from .fibonacci5 import fibonacci5 as recursive_algorithm
+from .fibonacci5 import fibonacci5_recursive_cache as cached_recursive_algorithm
+from .fibonacci5 import fibonacci5_dynamic_programming as dynamic_programming_algorithm
+from .fibonacci5 import fibonacci5_generator as generator_algorithm
 
 
 class MyTestCase(unittest.TestCase):

@@ -1,7 +1,8 @@
 import unittest
 # from .chess_queen2 import chess_queen as algorithm
 # from .chess_queen3 import chess_queen3 as algorithm
-from .chess_queen4 import chess_queen4 as algorithm
+# from .chess_queen4 import chess_queen4 as algorithm
+from .chess_queen5 import chess_queen5 as algorithm
 
 
 class MyTestCase(unittest.TestCase):

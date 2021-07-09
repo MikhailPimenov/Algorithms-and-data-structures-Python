@@ -1,5 +1,6 @@
 import unittest
-from .power_fast2 import power_fast as algorithm
+# from .power_fast2 import power_fast as algorithm
+from .power_fast5 import power_fast5 as algorithm
 
 
 class MyTestCase(unittest.TestCase):

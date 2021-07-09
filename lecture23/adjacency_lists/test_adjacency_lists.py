@@ -1,6 +1,7 @@
 import unittest
 # from .adjacency_lists2 import adjacency_lists as algorithm
-from .adjacency_lists3 import adjacency_lists3 as algorithm
+# from .adjacency_lists3 import adjacency_lists3 as algorithm
+from .adjacency_lists5 import adjacency_lists5 as algorithm
 
 
 class MyTestCase(unittest.TestCase):
@@ -11,10 +12,10 @@ class MyTestCase(unittest.TestCase):
         # C D
         # D B
         # A D
-        answer = {'A':{'B','D'},
-                  'B':{'A','D','C'},
-                  'C':{'B','D'},
-                  'D':{'A','B','C'},}
+        answer = {'A': {'B', 'D'},
+                  'B': {'A', 'D', 'C'},
+                  'C': {'B', 'D'},
+                  'D': {'A', 'B', 'C'}, }
 
         result = algorithm()
         self.assertEqual(answer, result, "test #1")
