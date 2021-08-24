@@ -12,6 +12,7 @@ def print_board(board: list):
 
 
 class MyTestCase(unittest.TestCase):
+
     def test_something(self):
         search_board = {}
         moves = []
@@ -91,6 +92,89 @@ class MyTestCase(unittest.TestCase):
         algorithm(board, Point(1, 3), Point(0, 4), moves, search_board)
         self.assertEqual(board, result_board, 'test #6')
         self.assertEqual(moves, result_moves, 'test #6.1')
+        moves.clear()
+
+    def test_linear_not_near(self):
+        search_board = {}
+        moves = []
+        max_row = 4
+        max_column = 10
+        pattern = [[i * max_column + j + 1 for j in range(0, max_column)]
+                   for i in range(0, max_row)]
+        print_board(pattern)
+
+        board = copy.deepcopy(pattern)
+        result_board = copy.deepcopy(pattern)
+        result_board[3][2] = 37
+        result_board[3][3] = 33
+        result_board[3][6] = 34
+        result_moves = ['U2', 'R2', 'D3', 'L3', 'L3', 'L3', 'U3', 'R3', 'R3', 'R3', 'L2', 'D2']
+
+        algorithm(board, Point(3, 6), Point(3, 2), moves, search_board)
+
+        self.assertEqual(result_board, board, 'test #1')
+        self.assertEqual(result_moves, moves, 'test #1.1')
+        moves.clear()
+
+        board = copy.deepcopy(pattern)
+        result_board = copy.deepcopy(pattern)
+        result_board[3][0] = 40
+        result_board[3][1] = 31
+        result_board[3][9] = 32
+        result_moves = ['U0', 'R2', 'D1', 'R3', 'R3', 'U1', 'L3', 'L3', 'L2', 'D0']
+
+        algorithm(board, Point(3, 9), Point(3, 0), moves, search_board)
+
+        self.assertEqual(result_board, board, 'test #2')
+        self.assertEqual(result_moves, moves, 'test #2.1')
+        moves.clear()
+
+        board = copy.deepcopy(pattern)
+        result_board = copy.deepcopy(pattern)
+        result_board[2][5] = 28
+        result_board[2][6] = 26
+        result_board[2][7] = 27
+        result_moves = ['U5', 'R1', 'D6', 'L2', 'U6', 'R2', 'L1', 'D5']
+
+        algorithm(board, Point(2, 7), Point(2, 5), moves, search_board)
+
+        self.assertEqual(result_board, board, 'test #3')
+        self.assertEqual(result_moves, moves, 'test #3.1')
+        moves.clear()
+
+    def test_linear_near(self):
+        search_board = {}
+        moves = []
+        max_row = 4
+        max_column = 10
+        pattern = [[i * max_column + j + 1 for j in range(0, max_column)]
+                   for i in range(0, max_row)]
+        print_board(pattern)
+
+        board = copy.deepcopy(pattern)
+        result_board = copy.deepcopy(pattern)
+        result_board[1][4] = 16
+        result_board[1][5] = 17
+        result_board[1][6] = 15
+        result_moves = ['U4', 'R0', 'R0', 'D6', 'R1', 'U6', 'L1', 'L0', 'L0', 'D4']
+
+        algorithm(board, Point(1, 5), Point(1, 4), moves, search_board)
+
+        self.assertEqual(result_board, board, 'test #1')
+        self.assertEqual(result_moves, moves, 'test #1.1')
+        moves.clear()
+
+        board = copy.deepcopy(pattern)
+        result_board = copy.deepcopy(pattern)
+        result_board[1][8] = 20
+        result_board[1][9] = 29
+        result_board[2][8] = 19
+        result_moves = ['U8', 'D8', 'L1', 'U8', 'R1', 'D8']
+
+        algorithm(board, Point(1, 9), Point(1, 8), moves, search_board)
+
+        self.assertEqual(result_board, board, 'test #2')
+        self.assertEqual(result_moves, moves, 'test #2.1')
         moves.clear()
 
 

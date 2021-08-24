@@ -28,9 +28,100 @@ def add_4_standard_moves(board: list, start: Point, finish: Point, moves: list):
 def swap3(board: list, start: Point, finish: Point, moves: list, search_board: dict):
     if start == finish:
         return
-    assert start.row != finish.row
+
+    if start.row == finish.row and \
+            start.row == len(board) - 1 and \
+            finish.column == len(board[start.row]) - 2:
+        assert False
 
     buffer = Point(start.row, finish.column if start.row > finish.row else start.column)
+
+    if start.row == finish.row:
+        if start.column - finish.column >= 2:
+            vertical_move(
+                moves,
+                start.row,
+                start.row - 1,
+                len(board),
+                finish.column
+            )
+            horizontal_move(
+                moves,
+                finish.column,
+                finish.column + 1,
+                len(board[start.row - 1]),
+                start.row - 1
+            )
+            new_buffer = Point(finish.row, finish.column + 1)
+            new_finish = Point(finish.row - 1, finish.column + 1)
+            update_search_board(board, start, finish, new_buffer, search_board)
+            replace_board_cells(board, start, finish, new_buffer)
+            add_4_standard_moves(board, start, new_finish, moves)
+            horizontal_move(
+                moves,
+                finish.column + 1,
+                finish.column,
+                len(board[start.row - 1]),
+                start.row - 1
+            )
+            vertical_move(
+                moves,
+                start.row - 1,
+                start.row,
+                len(board),
+                finish.column
+            )
+            return
+
+        # start.row != 0  !!! or use (start.row % length) instead of (start.row)
+        if start.column < len(board[start.row]) - 1:
+            vertical_move(
+                moves,
+                start.row,
+                start.row - 1,
+                len(board),
+                finish.column
+            )
+            horizontal_move(
+                moves,
+                finish.column,
+                finish.column + 2,
+                len(board[start.row - 1]),
+                start.row - 1
+            )
+            new_finish = Point(finish.row - 1, finish.column + 2)
+            new_buffer = Point(start.row, start.column + 1)
+            update_search_board(board, start, finish, new_buffer, search_board)  # check if it is correct
+            replace_board_cells(board, start, finish, new_buffer)
+            add_4_standard_moves(board, start, new_finish, moves)
+            horizontal_move(
+                moves,
+                finish.column + 2,
+                finish.column,
+                len(board[start.row - 1]),
+                start.row - 1
+            )
+            vertical_move(
+                moves,
+                start.row - 1,
+                start.row,
+                len(board),
+                finish.column
+            )
+            return
+
+        assert start.row < len(board) - 1
+        vertical_move(moves, start.row, start.row - 1, len(board), finish.column)
+
+        new_buffer = Point(finish.row + 1, finish.column)
+        new_finish = Point(finish.row - 1, finish.column)
+        update_search_board(board, start, finish, new_buffer, search_board)
+        replace_board_cells(board, start, finish, new_buffer)
+        add_4_standard_moves(board, start, new_finish, moves)
+
+        vertical_move(moves, start.row - 1, start.row, len(board), finish.column)
+
+        return
 
     if start.column == finish.column:
         if start.column == len(board[finish.row]) - 1:
@@ -73,8 +164,6 @@ def swap3(board: list, start: Point, finish: Point, moves: list, search_board: d
             finish.row,
         )
         return
-
-    # if start.row == finish.row:
 
     update_search_board(board, start, finish, buffer, search_board)
     replace_board_cells(board, start, finish, buffer)

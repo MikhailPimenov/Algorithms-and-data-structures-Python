@@ -27,7 +27,24 @@ def solve(board: list, solved_board: list):
             finish = Point(row, column)
             swap3(board, start, finish, moves, search_board)
 
+    row = len(board) - 1
+    for column in range(len(board[row]) - 2):
+        start = search_board[solved_board[row][column]]
+        finish = Point(row, column)
+        swap3(board, start, finish, moves, search_board)
 
+    if tail_is_solved(board, solved_board):
+        return moves
 
+    if len(board) % 2 and len(board[0]) % 2:
+        return None
 
+    if len(board) % 2:
+        swap2_horizontal(board, moves)
+        start = Point(row, len(board[row]) - 2)
+        finish = Point(row - 1, len(board[row]) - 1)
+        swap3(board, start, finish, moves, search_board)
+        return moves
 
+    swap2_vertical(board, moves)
+    return moves
