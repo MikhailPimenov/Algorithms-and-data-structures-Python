@@ -12,8 +12,8 @@ def print_board(board: list):
 
 class MyTestCase(unittest.TestCase):
     def test_something(self):
-        max_row = 4
-        max_column = 10
+        max_row = 3
+        max_column = 5
         solved_pattern = [[i * max_column + j + 1 for j in range(0, max_column)]
                           for i in range(0, max_row)]
 
@@ -26,10 +26,10 @@ class MyTestCase(unittest.TestCase):
         board = copy.deepcopy(pattern)
 
         print('solve:')
-        solve(board, solved_pattern)
+        solve(board, solved_board)
         print_board(board)
 
-        self.assertEqual(True, True)
+        self.assertEqual(solved_pattern, board, 'test #1')
 
 
 if __name__ == '__main__':

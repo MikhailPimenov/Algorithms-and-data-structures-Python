@@ -1,5 +1,5 @@
 import unittest
-from .base_move import base_move as algorithm
+from .move import base_move as algorithm
 
 
 class MyTestCase(unittest.TestCase):

@@ -1,4 +1,4 @@
-from others.loopover.base_move.base_move import base_move
+from others.loopover.move.move import base_move
 
 
 def vertical_move(moves: list, start_row: int, finish_row: int, length: int, current_column: int):

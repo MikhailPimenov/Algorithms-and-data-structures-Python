@@ -1,8 +1,6 @@
-from collections import namedtuple
-from others.loopover.horizontal_move.horizontal_move import horizontal_move
-from others.loopover.vertical_move.vertical_move import vertical_move
-
-Point = namedtuple('Point', 'row column')
+from others.loopover.move.horizontal_move.horizontal_move import horizontal_move
+from others.loopover.move.vertical_move.vertical_move import vertical_move
+from others.loopover.point.point import Point
 
 
 def update_search_board(board: list, start: Point, finish: Point, buffer: Point, search_board: dict):
