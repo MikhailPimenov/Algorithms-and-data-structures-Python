@@ -177,6 +177,19 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(result_moves, moves, 'test #2.1')
         moves.clear()
 
+        board = copy.deepcopy(pattern)
+        result_board = copy.deepcopy(pattern)
+        result_board[0][0] = 11
+        result_board[1][0] = 21
+        result_board[2][0] = 1
+        result_moves = ['U8', 'D8', 'L1', 'U8', 'R1', 'D8']
+
+        algorithm(board, Point(1, 9), Point(1, 8), moves, search_board)
+
+        self.assertEqual(result_board, board, 'test #3')
+        self.assertEqual(result_moves, moves, 'test #3.1')
+        moves.clear()
+
 
 if __name__ == '__main__':
     unittest.main()
