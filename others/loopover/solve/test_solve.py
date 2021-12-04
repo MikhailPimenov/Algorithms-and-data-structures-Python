@@ -28,7 +28,6 @@ class MyTestCase(unittest.TestCase):
         if moves is not None:
             total_steps += len(moves)
 
-
         board_for_simulator = copy.deepcopy(pattern)
         simulator_algorithm(board_for_simulator, moves)
         self.assertEqual(solved_pattern, board_for_simulator, 'test #2')
@@ -45,7 +44,6 @@ class MyTestCase(unittest.TestCase):
         moves = algorithm(board_for_moves, solved_pattern)
         if moves is not None:
             total_steps += len(moves)
-
 
         board_for_simulator = copy.deepcopy(pattern)
         simulator_algorithm(board_for_simulator, moves)
@@ -499,7 +497,6 @@ class MyTestCase(unittest.TestCase):
         simulator_algorithm(board_for_simulator, moves)
         self.assertEqual(solved_pattern, board_for_simulator, 'test #21')
 
-
         pattern = [
             ['L', 'N', 'W', 'F', 'U'],
             ['O', 'D', 'K', 'C', 'V'],
@@ -785,6 +782,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(solved_pattern, board_for_simulator, 'test #32')
 
         print('total_steps =', total_steps)
+
 
 if __name__ == '__main__':
     unittest.main()

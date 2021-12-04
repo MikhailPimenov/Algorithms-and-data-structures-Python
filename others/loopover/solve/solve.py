@@ -11,7 +11,7 @@ from others.loopover.move.reduce_moves import reduce_moves
 from others.loopover.simulator.simulator import simulator
 
 
-def solve(board: list, solved_board: list):
+def solve(board: list, solved_board: list) -> list:
     board_for_simulator = copy.deepcopy(board)
     moves_pointer = 0
 
@@ -87,7 +87,6 @@ def solve(board: list, solved_board: list):
         #  the very last element and the very last element of the previous row:
         start = Point(row, len(board[row]) - 1)
         finish = Point(row - 1, len(board[row]) - 1)
-        # if start != finish:
 
         #  swapping them without a buffer:
         swap2_horizontal(board, start, finish, len(board[row]), moves, search_board)
@@ -115,7 +114,7 @@ def solve(board: list, solved_board: list):
     #  if vertical length is even, swapping two last elements of the last row without buffer:
     start = Point(row, len(board[row]) - 1)
     finish = Point(row, len(board[row]) - 2)
-    # if start != finish:
+
     swap2_vertical(board, start, finish, len(board), moves, search_board)
 
     simulator(board_for_simulator, tuple(moves[moves_pointer:]))

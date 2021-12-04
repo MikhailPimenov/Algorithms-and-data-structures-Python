@@ -34,7 +34,7 @@ def swap3(
     :return: None
     """
     if start == finish:
-        return
+        return None
 
     #  for the last two elements of the board this function is not suitable:
     if start.row == finish.row and \
@@ -99,7 +99,7 @@ def swap3(
             buffer=buffer_to_replace,
         )
 
-        return
+        return None
 
     if start.column == finish.column:
         column = start.column
@@ -157,7 +157,7 @@ def swap3(
             buffer=buffer_to_replace,
         )
 
-        return
+        return None
 
     buffer = Point(
         start.row if start.row > finish.row else finish.row,

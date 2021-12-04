@@ -15,7 +15,9 @@ def replace_board_cells3(
     :param buffer: Point - buffer element. On this place there will be finish element.
     :return: None
     """
-    temp = board[finish.row][finish.column]
-    board[finish.row][finish.column] = board[start.row][start.column]
-    board[start.row][start.column] = board[buffer.row][buffer.column]
-    board[buffer.row][buffer.column] = temp
+    (board[finish.row][finish.column],
+     board[start.row][start.column],
+     board[buffer.row][buffer.column]) = \
+    (board[start.row][start.column],
+     board[buffer.row][buffer.column],
+     board[finish.row][finish.column])

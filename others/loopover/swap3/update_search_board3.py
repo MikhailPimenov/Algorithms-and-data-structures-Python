@@ -12,8 +12,9 @@ def update_search_board3(
     :param search_board: dictionary with all elements as keys and their coordinates as values - to be updated
     :return: None
     """
-
-    temp_point = search_board[start]
-    search_board[start] = search_board[finish]
-    search_board[finish] = search_board[buffer]
-    search_board[buffer] = temp_point
+    (search_board[start],
+     search_board[finish],
+     search_board[buffer]) =\
+    (search_board[finish],
+     search_board[buffer],
+     search_board[start])
